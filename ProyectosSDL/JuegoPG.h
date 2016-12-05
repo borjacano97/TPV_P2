@@ -2,7 +2,7 @@
 #include "SDL.h" 
 #include <string>
 #include "TexturasSDL.h"
-#include "GlobosPG.h"
+#include "Globos.h"
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -21,7 +21,7 @@ private:
 	int contGlobos, puntos, aux;
 	SDL_Event e;
 	vector<TexturasSDL*> vecTexturas;
-	vector<GlobosPG*> vecGlobos;
+	vector<Globos*> vecGlobos;
 	SDL_Window * pWin;
 	SDL_Renderer * pRenderer;
 	SDL_Texture *pTexture;

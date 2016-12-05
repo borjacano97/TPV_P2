@@ -11,15 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GlobosPG.cpp" />
+    <ClCompile Include="..\Globos.cpp" />
     <ClCompile Include="..\JuegoPG.cpp" />
     <ClCompile Include="..\MainP1.cpp" />
     <ClCompile Include="..\TexturasSDL.cpp" />
+    <ClCompile Include="Mariposa.cpp" />
+    <ClCompile Include="ObjetoPG.cpp" />
+    <ClCompile Include="Premio.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\GlobosPG.h" />
+    <ClInclude Include="..\Globos.h" />
     <ClInclude Include="..\JuegoPG.h" />
     <ClInclude Include="..\TexturasSDL.h" />
+    <ClInclude Include="Mariposa.h" />
+    <ClInclude Include="ObjetoJuego.h" />
+    <ClInclude Include="ObjetoPG.h" />
+    <ClInclude Include="Premio.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{28A4C5CD-307A-4FE6-81E4-4CE1F1E49AB4}</ProjectGuid>
@@ -29,7 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

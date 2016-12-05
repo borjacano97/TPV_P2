@@ -21,7 +21,7 @@ JuegoPG::JuegoPG()
 		vecTexturas[i]->load(pRenderer);
 	}
 	for (size_t i = 0; i < vecGlobos.size(); i++) {
-		vecGlobos[i] = new GlobosPG(vecTexturas[1], rand() % (SCREEN_WIDTH - 50), rand() % (SCREEN_HEIGHT - 50));
+		vecGlobos[i] = new Globos(vecTexturas[1], rand() % (SCREEN_WIDTH - 50), rand() % (SCREEN_HEIGHT - 50));
 	}
 	//vecGlobos[0] = new GlobosPG(vecTexturas[1],(SCREEN_WIDTH/2), (SCREEN_HEIGHT/2));
 //	vecGlobos[1] = new GlobosPG(vecTexturas[1], (vecGlobos[0]->getX() + (vecTexturas[1]->getW() / 2)), vecGlobos[0]->getY() + (vecTexturas[1]->getH() / 2));

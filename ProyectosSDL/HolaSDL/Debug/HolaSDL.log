@@ -1,2 +1,20 @@
-﻿  HolaSDL.vcxproj -> D:\Documentos\UCM\Segundo curso\Tecnologías de la programación de Videojuegos\Práctica 2\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> D:\Documentos\UCM\Segundo curso\Tecnologías de la programación de Videojuegos\Práctica 2\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Compilación iniciada a las 05/12/2016 17:40:27.
+     1>Proyecto "C:\hlocal\TPV_\TPV_P2\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\GlobosPG.cpp ..\JuegoPG.cpp ..\MainP1.cpp ..\TexturasSDL.cpp
+         TexturasSDL.cpp
+         MainP1.cpp
+         JuegoPG.cpp
+         GlobosPG.cpp
+         Generando código...
+       Link:
+         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\TPV_\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\TPV_\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\TPV_\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\GlobosPG.obj
+         Debug\JuegoPG.obj
+         Debug\MainP1.obj
+         Debug\TexturasSDL.obj
+         HolaSDL.vcxproj -> C:\hlocal\TPV_\TPV_P2\ProyectosSDL\bin\HolaSDLDebug.exe
+     1>Compilación del proyecto terminada "C:\hlocal\TPV_\TPV_P2\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" (Build destinos).
+
+Compilación correcta.
+
+Tiempo transcurrido 00:00:02.09
