@@ -1,19 +1,14 @@
-#pragma once
+//#ifdef H_ObjetoJuego_H
+//#define H_ObjetoJuego_H
 class ObjetoJuego
 {
 public:
-
-	ObjetoJuego()
-	{
-	}
-
-	virtual ~ObjetoJuego()
-	{
-	}
-	void draw(){
-	}
-	void update(){}
-	bool OnClick(){}
-
+	ObjetoJuego() {};
+	virtual ~ObjetoJuego() {};
+	virtual void draw() {};
+	virtual void update() {};
+	virtual bool onClick() {};
+	virtual int getPuntos() {};
 };
+//#endif
 

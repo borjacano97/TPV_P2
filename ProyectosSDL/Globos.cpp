@@ -1,6 +1,15 @@
 #include "Globos.h"
+#include "SDL.h"
+//#include "checkML.h"
+#include <iostream>
 
-Globos::Globos(TexturasSDL * img, int px, int py){
+
+Globos::Globos(int px, int y, JuegoPG::Texturas_t texture, JuegoPG * game): ObjetoPG(px, py, texture, game) {
+	puntos = 1;
+	rect.w = game->getTexturas(texture)->getW();
+	rect.h = game->getTexturas(texture)->getH();
+}
+/*Globos::Globos(TexturasSDL * img, int px, int py){
 	visible = true;
 	explotado = false;
 	puntos = 1;
@@ -11,23 +20,23 @@ Globos::Globos(TexturasSDL * img, int px, int py){
 	rect.y = py;
 	rect.w = pTexture->getW();
 	rect.h = pTexture->getH();
-}
+}*/
 Globos::~Globos(){}
-
+bool Globos::draw() {
+	j->getTextura(textura)->(juego->getRender(), rect);
+}
 void Globos::draw(SDL_Renderer* pRenderer)const{
 	if (visible && !explotado)
 		SDL_RenderCopy(pRenderer, pTexture->pTextura, nullptr, &rect);
 }
 bool Globos::OnClick(int pmx, int pmy) {
-	bool esta = false;
-	int xtotal = x + pTexture->getW();
-	int ytotal = y + pTexture->getH();
-	if (visible && !explotado && pmx < xtotal && pmx > x && pmy < ytotal && pmy > y) {
-		explotado = esta = true;
-		cout << "Pum";
+	if (ObjetoPG::onClick()) {
+		juego->newPuntos(this);
+		juego->newBaja(this);
+		return true;
 	}
-		
-	return esta;
+	else
+		return false;
 }
 void Globos::update() {
 	if (rand() % 100 < PVIS) visible = true;
