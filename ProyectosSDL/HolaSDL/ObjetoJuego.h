@@ -3,12 +3,16 @@
 class ObjetoJuego
 {
 public:
+	bool live = true;
+
 	ObjetoJuego() {};
 	virtual ~ObjetoJuego() {};
 	virtual void draw() {};
 	virtual void update() {};
 	virtual bool onClick() {};
 	virtual int getPuntos() {};
+	bool live() { return live;}
+	
 };
 //#endif
 

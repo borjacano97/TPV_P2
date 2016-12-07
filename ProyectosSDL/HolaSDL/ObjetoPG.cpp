@@ -7,8 +7,8 @@ ObjetoPG::ObjetoPG(){}
 ObjetoPG::ObjetoPG(int x, int y, JuegoPG::Texturas_t textura, JuegoPG * juego): x(x), y(y), textura(textura), juego(juego){
 	rect.x = x;
 	rect.y = y;
-	rect.w = juego->getTexturas(textura)->getW();
-	rect.h = juego->getTexturas(textura)->getH();
+	rect.w = juego->getTextura(textura)->getW();
+	rect.h = juego->getTextura(textura)->getH();
 }
 
 ObjetoPG::~ObjetoPG(){}
@@ -30,3 +30,4 @@ bool ObjetoPG::onClick() {
 int ObjetoPG::getPuntos() {
 	return puntos;
 }
+

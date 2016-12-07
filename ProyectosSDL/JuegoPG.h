@@ -25,13 +25,17 @@ public:
 		return vecTexturas[et];
 	};
 	SDL_Renderer* getRender() const { return pRenderer; };
-	void getMousePos(int &pmx, int &pmy) const;
+	void getMousePos(int &pmx, int &pmy) const {
+		pmx = mousex;
+		pmy = mousey;
+	};
 	//void newPuntos(ObjetoJuego* po);
 	void newPremio();
 	//void newBaja(ObjetoJuego* po);
 private:
 	bool gameover, pausa, exit;
 	int contGlobos, puntos, aux;
+	int mousex, mousey;
 	SDL_Event e;
 	vector<string> Sprites; //dirSprites
 	vector<TexturasSDL*> vecTexturas;
@@ -55,5 +59,6 @@ private:
 	void freeMedia();
 	void initMedia();
 	bool initObjetos();
+	void rndPos(int &x, int &y);
 };
 

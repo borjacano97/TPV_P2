@@ -22,6 +22,7 @@ JuegoPG::JuegoPG()
 	Sprites.push_back("..\\bmps\\premio.png");*/
 	contGlobos = 10;
 
+
 	puntos = 0;
 	aux = 0;
 	Objetos.resize(contGlobos + 2);
@@ -138,7 +139,7 @@ void JuegoPG::freeMedia() {
 			Objetos[i] = nullptr;
 		}
 	}
-	for (; i < vecTexturas.size(); i++) {
+	for ( i = 0 ; i < vecTexturas.size(); i++) {
 		delete vecTexturas[i];
 		vecTexturas[i] = nullptr;
 	}
@@ -180,9 +181,22 @@ void JuegoPG::handle_events() {
 	}
 }
 void JuegoPG::onClick(int pmx, int pmy) {
-	for (size_t i = 0; i < Objetos.size();i++) {
-		if (Objetos[i]->OnClick(pmx, pmy))
-			puntos += Objetos[i]->getPuntos();
+	mousex = pmx;
+	mousey = pmy;
+	bool pinchado = false;
+	size_t i = Objetos.size() - 1;
+	while (!pinchado && i >= 0) {
+		if (Objetos[i] != nullptr) {
+			if (Objetos[i]->OnClick(mousex, mousey)) {
+				pinchado = true;
+				if (!Objetos[i]->live()) {
+					delete Objetos[i];
+					Objetos[i] = nullptr;
+				}
+			}
+		}
+		
+		i--;
 	}
 }
 
@@ -193,4 +207,25 @@ void JuegoPG::update() {
 		if (!Objetos[i]->pinchado())
 			Objetos[i]->update();
 	}
+}
+void JuegoPG::newPremio() {
+	int x, y;
+	rndPos(x, y);
+	Objetos.push_back(new Premio(x, y, TPremio, this));
+
+}
+void JuegoPG::rndPos(int &x, int &y) {
+	//Calculamos posiciones aleatorias para el objeto dentro de la ventana
+	x = rand() % SCREEN_WIDTH;
+	y = rand() % SCREEN_HEIGHT;
+
+
+	//Nos aseguramos que el Objeto no esté justo en el borde
+	int margen = 100;
+	//Control x
+	if (x > SCREEN_WIDTH - margen) { x = SCREEN_WIDTH - margen; }
+	else if (x < margen) { x = margen; }
+	//Control y
+	if (y > SCREEN_HEIGHT - margen) { y = SCREEN_HEIGHT - margen; }
+	else if (y < margen) { y = margen; }
 }
