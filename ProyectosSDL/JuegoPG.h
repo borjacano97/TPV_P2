@@ -5,7 +5,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
-//#include "ObjetoJuego.h"
+#include "ObjetoJuego.h"
 using namespace std;
 
 class JuegoPG
@@ -21,25 +21,25 @@ public:
 	enum Texturas_t {
 		TGlobo = 0, TFondo = 1, TMariposa = 2, TPremio = 3
 	};
-	TexturasSDL * getTextura(Texturas_t et) const {
-		return vecTexturas[et];
+	TexturasSDL * getTextura(Texturas_t t) const {
+		return vecTexturas[t];
 	};
 	SDL_Renderer* getRender() const { return pRenderer; };
 	void getMousePos(int &pmx, int &pmy) const {
 		pmx = mousex;
 		pmy = mousey;
 	};
-	//void newPuntos(ObjetoJuego* po);
+	void sumaPuntos(ObjetoJuego* p);
 	void newPremio();
-	//void newBaja(ObjetoJuego* po);
+	void destroid(ObjetoJuego* p);
 private:
 	bool gameover, pausa, exit;
-	int contGlobos, puntos, aux;
+	int contGlobos, puntos, aux, contMar;
 	int mousex, mousey;
 	SDL_Event e;
 	vector<string> Sprites; //dirSprites
 	vector<TexturasSDL*> vecTexturas;
-	vector<Globos*> Objetos; //vector<ObjetoJuego *>objetos;
+	vector<ObjetoJuego*> Objetos; //vector<ObjetoJuego *>objetos;
 	SDL_Rect fond;
 	SDL_Window * pWin;
 	SDL_Renderer * pRenderer;

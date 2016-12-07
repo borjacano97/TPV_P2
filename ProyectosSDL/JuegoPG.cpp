@@ -6,12 +6,10 @@
 
 using namespace std;
 
-JuegoPG::JuegoPG()
-{
+JuegoPG::JuegoPG() {
 	//Inicializamos variables y punteros
 	pWin = nullptr;
 	pRenderer = nullptr;
-	srand(1);
 	initSDL();
 	vecTexturas.reserve(4);
 	Sprites.reserve(5);
@@ -21,11 +19,11 @@ JuegoPG::JuegoPG()
 	Sprites.push_back("..\\bmps\\mariposa.png");
 	Sprites.push_back("..\\bmps\\premio.png");*/
 	contGlobos = 10;
-
+	contMar = 1;
 
 	puntos = 0;
 	aux = 0;
-	Objetos.resize(contGlobos + 2);
+	Objetos.resize(contGlobos + contMar /* x2 */);
 	initMedia();
 	initObjetos();
 	/*for (size_t i = 0;i < vecTexturas.size(); i++) {
@@ -43,24 +41,38 @@ JuegoPG::~JuegoPG()
 	closeSDL();
 }
 
+//Perf
 void JuegoPG::run(){
 	SDL_HideWindow(pWin);
 	if (!error) {
 		Uint32 MSxUpdate = 500;
 		cout << "PLAY \n";
 		Uint32 lastUpdate = SDL_GetTicks();
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Start", "¿Desea empezar?", nullptr);
+
+		SDL_ShowWindow(pWin);
 		render(/*pRenderer, pTexture*/);
 		handle_events();
 		while (!exit && !gameover) {
 			if (!pausa && SDL_GetTicks() - lastUpdate >= MSxUpdate) {
 				update();
 				lastUpdate = SDL_GetTicks();
+				if (contGlobos == 0) {
+					gameover = true;
+				}
 			}
 			render();
 			handle_events();			
 		}
-		if (exit) cout << "EXIT \n";
-		else cout << "Has obtenido " << puntos << " puntos\n";
+		if (exit) { 
+			cout << "EXIT \n"; 
+		} else { 
+			closeSDL();
+			cout << "Has obtenido " << puntos << " puntos\n";
+			string points = "Puntos: ";
+			points += to_string(puntos);
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Game Over", points.c_str(), nullptr);
+		}
 		SDL_Delay(1000); //cin.get();
 	}
 }
@@ -104,20 +116,16 @@ void JuegoPG::closeSDL() {
 	SDL_Quit();
 }
 
-//Done
+//Perfect
 bool JuegoPG::initObjetos() {
-	srand(10);
-	Texturas_t t;
+	srand(SDL_GetTicks());
 	int aux1, aux2;
 	for (size_t i = 0; i < contGlobos; i++) {
-		aux1 = rand() % SCREEN_HEIGHT;
-		aux2 = rand() % SCREEN_WIDTH;
-		if (aux1 > SCREEN_HEIGHT - 100) aux1 = SCREEN_HEIGHT - 100;
-		if (aux2 > SCREEN_WIDTH - 100) aux2 = SCREEN_WIDTH - 100;
-		t = TGlobo;
-		Objetos.push_back(new Globos(aux1, aux2, t, this));
+		rndPos(aux1, aux2);
+		Objetos.push_back(new Globos(aux1, aux2, TGlobo, this));
 	}
-	Objetos.push_back(new Mariposa(100, 100, Texturas_t::TMariposa, this));
+	rndPos(aux1, aux2);
+	Objetos.push_back(new Mariposa(aux1, aux2, TMariposa, this));
 	//El vecGlobos hay que cambiarlo por un vector general para todos los objetos.
 }
 
@@ -139,7 +147,7 @@ void JuegoPG::freeMedia() {
 			Objetos[i] = nullptr;
 		}
 	}
-	for ( i = 0 ; i < vecTexturas.size(); i++) {
+	for (i = 0 ; i < vecTexturas.size(); i++) {
 		delete vecTexturas[i];
 		vecTexturas[i] = nullptr;
 	}
@@ -154,7 +162,7 @@ void JuegoPG::render(/*SDL_Renderer* pRenderer, SDL_Texture* pTexture*/) {
 	// Draw objets 
 	for (size_t i = 0; i < Objetos.size(); i++) {
 		if (!Objetos[i]->pinchado) {
-			Objetos[i]->draw(pRenderer);
+			Objetos[i]->draw();
 		}
 	}  // nullptr, nullptr -> toda la textura en toda la ventana
 
@@ -162,7 +170,7 @@ void JuegoPG::render(/*SDL_Renderer* pRenderer, SDL_Texture* pTexture*/) {
 	SDL_RenderPresent(pRenderer);
 }
 
-//Done
+//Perf
 void JuegoPG::handle_events() {
 
 	while (SDL_PollEvent(&e) && !exit) {
@@ -180,6 +188,8 @@ void JuegoPG::handle_events() {
 		}
 	}
 }
+
+//Perf
 void JuegoPG::onClick(int pmx, int pmy) {
 	mousex = pmx;
 	mousey = pmy;
@@ -195,7 +205,6 @@ void JuegoPG::onClick(int pmx, int pmy) {
 				}
 			}
 		}
-		
 		i--;
 	}
 }
@@ -208,6 +217,15 @@ void JuegoPG::update() {
 			Objetos[i]->update();
 	}
 }
+
+//Perf
+void JuegoPG::destroid(ObjetoJuego * p) {
+	p->live = false;
+	if (typeid(*p) == typeid(Globos)) contGlobos--;
+	else if (typeid(*p) == typeid(Mariposa)) contMar--;
+}
+
+//Perf	
 void JuegoPG::newPremio() {
 	int x, y;
 	rndPos(x, y);
@@ -228,4 +246,11 @@ void JuegoPG::rndPos(int &x, int &y) {
 	//Control y
 	if (y > SCREEN_HEIGHT - margen) { y = SCREEN_HEIGHT - margen; }
 	else if (y < margen) { y = margen; }
+}
+
+//Perf
+void JuegoPG::sumaPuntos(ObjetoJuego* p) {
+	int aux = p->getPuntos();
+	puntos += aux;
+	cout << aux << " puntos/n";
 }
