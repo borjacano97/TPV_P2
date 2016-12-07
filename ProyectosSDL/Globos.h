@@ -2,6 +2,7 @@
 //#define H_GlobosPG_H
 #pragma once
 
+#include "JuegoPG.h"
 #include "ObjetoPG.h"
 #include <iostream>  // la consola: cin / cout
 using namespace std; // Para cualificar automaticamente con std:: los identificadores de la librería estandar 

@@ -8,16 +8,17 @@ class ObjetoPG : public ObjetoJuego{
 
 public:
 	ObjetoPG();
-	~ObjetoPG();
+	virtual ~ObjetoPG() {};
 	virtual bool onClick();
 	virtual void draw();
 	virtual int getPuntos();
 protected:
+	ObjetoPG(int x, int y, JuegoPG::Texturas_t t, JuegoPG * juego);
 	bool dentro(int x, int y) const;
 	int x, y, puntos;
 	bool visible;
 	SDL_Rect rect;
-	JuegoPG *juego;
+	JuegoPG * juego;
 	JuegoPG::Texturas_t textura;
 
 };

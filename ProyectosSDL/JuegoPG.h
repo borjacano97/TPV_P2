@@ -2,9 +2,10 @@
 #include "SDL.h" 
 #include <string>
 #include "TexturasSDL.h"
-#include "Globos.h"
 #include <iostream>
+#include <time.h>
 #include <vector>
+//#include "ObjetoJuego.h"
 using namespace std;
 
 class JuegoPG
@@ -16,12 +17,26 @@ public:
 	~JuegoPG();
 	void run();
 	bool error;
+
+	enum Texturas_t {
+		TGlobo = 0, TFondo = 1, TMariposa = 2, TPremio = 3
+	};
+	TexturasSDL * getTextura(Texturas_t et) const {
+		return vecTexturas[et];
+	};
+	SDL_Renderer* getRender() const { return pRenderer; };
+	void getMousePos(int &pmx, int &pmy) const;
+	//void newPuntos(ObjetoJuego* po);
+	void newPremio();
+	//void newBaja(ObjetoJuego* po);
 private:
 	bool gameover, pausa, exit;
 	int contGlobos, puntos, aux;
 	SDL_Event e;
+	vector<string> Sprites; //dirSprites
 	vector<TexturasSDL*> vecTexturas;
-	vector<Globos*> vecGlobos;
+	vector<Globos*> Objetos; //vector<ObjetoJuego *>objetos;
+	SDL_Rect fond;
 	SDL_Window * pWin;
 	SDL_Renderer * pRenderer;
 	SDL_Texture *pTexture;
@@ -29,13 +44,16 @@ private:
 
 
 	
-	bool initSDL(SDL_Window* &pWindow, SDL_Renderer* &pRenderer);
-	void closeSDL(SDL_Window* & pWindow, SDL_Renderer* & pRenderer);
+	bool initSDL();
+	void closeSDL();
 	bool initGlobos();//Éstos métodos los he dejado aquí porque lo pone en la especificación
 	void freeGlobos();//Aunque no les encuentro el sentido porque su función ya la cumple el contructor de Juego
-	void render(SDL_Renderer* pRenderer, SDL_Texture* pTexture);
+	void render(/*SDL_Renderer* pRenderer, SDL_Texture* pTexture*/);
 	void onClick(int pmx, int pmy);
 	void update();
 	void handle_events();
+	void freeMedia();
+	void initMedia();
+	bool initObjetos();
 };
 

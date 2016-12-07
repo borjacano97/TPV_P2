@@ -21,14 +21,16 @@ Globos::Globos(int px, int y, JuegoPG::Texturas_t texture, JuegoPG * game): Obje
 	rect.w = pTexture->getW();
 	rect.h = pTexture->getH();
 }*/
-Globos::~Globos(){}
-bool Globos::draw() {
-	j->getTextura(textura)->(juego->getRender(), rect);
+Globos::~Globos() {}
+
+void Globos::draw() {
+	j->getTextura(textura)->draw(juego->getRender(), rect);
 }
-void Globos::draw(SDL_Renderer* pRenderer)const{
+/*void Globos::draw(SDL_Renderer* pRenderer)const{
 	if (visible && !explotado)
 		SDL_RenderCopy(pRenderer, pTexture->pTextura, nullptr, &rect);
-}
+}*/ 
+
 bool Globos::OnClick(int pmx, int pmy) {
 	if (ObjetoPG::onClick()) {
 		juego->newPuntos(this);
@@ -38,6 +40,7 @@ bool Globos::OnClick(int pmx, int pmy) {
 	else
 		return false;
 }
+
 void Globos::update() {
 	if (rand() % 100 < PVIS) visible = true;
 	else visible = false;
